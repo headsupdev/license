@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.headsupdev</groupId>
+    <artifactId>headsupdev-parent</artifactId>
+    <version>1</version>
+  </parent>
+  <artifactId>license</artifactId>
+  <groupId>org.headsupdev.license</groupId>
+  <version>1.0-SNAPSHOT</version>
+  <name>HeadsUp License</name>
+  <url>http://headsupdev.org/license/docs/</url>
+
+  <scm>
+    <connection>scm:git:git://github.com/headsupdev/license.git</connection>
+    <developerConnection>scm:git:git@github.com:headsupdev/license.git</developerConnection>
+    <url>http://headsupdev.org/license/files/</url>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk14</artifactId>
+      <version>1.46</version>
+    </dependency>
+    <dependency>
+      <groupId>org.headsupdev.support</groupId>
+      <artifactId>java-support</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <dependency>
+       <groupId>junit</groupId>
+       <artifactId>junit</artifactId>
+       <version>3.8.1</version>
+       <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.headsupdev.license.manager.Main</mainClass>
+
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <classpathLayoutType>repository</classpathLayoutType>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>org.headsupdev.license.manager.Main</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>headsup-open-release</id>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>dav:http://headsupdev.org/repository/release/</url>
+    </repository>
+    <repository>
+      <id>headsup-open-snapshot</id>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <url>dav:http://headsupdev.org/repository/snapshot/</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <site>
+      <id>headsupdev-site</id>
+      <url>dav:http://headsupdev.org/repository/site/license/</url>
+    </site>
+  </distributionManagement>
+</project>
