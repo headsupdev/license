@@ -8,7 +8,7 @@
   </parent>
   <artifactId>license</artifactId>
   <groupId>org.headsupdev.license</groupId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>HeadsUp License</name>
   <url>http://headsupdev.org/license/docs/</url>
 
