@@ -18,6 +18,16 @@
     <url>http://headsupdev.org/license/files/</url>
   </scm>
 
+  <issueManagement>
+    <system>HeadsUp Agile</system>
+    <url>http://headsupdev.org/license/issues</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>HeadsUp Agile</system>
+    <url>http://headsupdev.org/license/builds</url>
+  </ciManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.bouncycastle</groupId>
