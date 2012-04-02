@@ -86,7 +86,7 @@
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-      <url>dav:http://headsupdev.org/repository/release/</url>
+      <url>http://headsupdev.org/repository/release/</url>
     </repository>
   </repositories>
 
