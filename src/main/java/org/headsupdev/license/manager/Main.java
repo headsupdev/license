@@ -50,7 +50,7 @@ public class Main {
             }
             else if ( option.equals( "-configdir" ) )
             {
-                config.setLicenseDirectory( new File( args[ i++ ] ) );
+                config.setLicenseDirectory( new File( args[ ++i ] ) );
             }
         }
 

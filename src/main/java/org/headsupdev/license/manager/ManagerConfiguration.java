@@ -56,6 +56,9 @@ public class ManagerConfiguration
     {
         this.licenseDirectory = licenseDirectory;
         storePreferences();
+
+        // setup all files using latest config
+        loadPreferences();
     }
 
     public File getPrivateKeyFile()
