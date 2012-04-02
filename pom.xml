@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.headsupdev</groupId>
     <artifactId>headsupdev-parent</artifactId>
-    <version>1</version>
+    <version>2</version>
   </parent>
   <artifactId>license</artifactId>
   <groupId>org.headsupdev.license</groupId>
@@ -49,18 +49,6 @@
   </dependencies>
 
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <source>1.5</source>
-            <target>1.5</target>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -99,16 +87,6 @@
         <enabled>false</enabled>
       </snapshots>
       <url>dav:http://headsupdev.org/repository/release/</url>
-    </repository>
-    <repository>
-      <id>headsup-open-snapshot</id>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <url>dav:http://headsupdev.org/repository/snapshot/</url>
     </repository>
   </repositories>
 
