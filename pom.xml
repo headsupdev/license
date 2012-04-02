@@ -79,7 +79,7 @@
 
   <repositories>
     <repository>
-      <id>headsup-open-release</id>
+      <id>headsupdev-release</id>
       <releases>
         <enabled>true</enabled>
       </releases>
