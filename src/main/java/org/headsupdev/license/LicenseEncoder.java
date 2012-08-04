@@ -16,12 +16,13 @@
 
 package org.headsupdev.license;
 
-import org.bouncycastle.util.encoders.Base64;
 import org.headsupdev.license.exception.InvalidFormatException;
 
-import javax.crypto.Cipher;
 import java.security.*;
 import java.io.*;
+
+import javax.crypto.Cipher;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * TODO add a description
@@ -92,7 +93,7 @@ public class LicenseEncoder
             cipher2.init( Cipher.ENCRYPT_MODE, shared );
             byte[] out = cipher2.doFinal( decompressed );
 
-            return new String( Base64.encode( out ) );
+            return DatatypeConverter.printBase64Binary( out );
         }
         catch ( Exception e )
         {

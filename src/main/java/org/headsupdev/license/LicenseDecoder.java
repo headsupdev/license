@@ -16,17 +16,16 @@
 
 package org.headsupdev.license;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.util.encoders.Base64;
 import org.headsupdev.license.exception.*;
 
-import javax.crypto.Cipher;
 import java.util.Date;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
-import java.security.Security;
 import java.security.Key;
 import java.security.MessageDigest;
+
+import javax.crypto.Cipher;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * TODO add a description
@@ -38,11 +37,6 @@ import java.security.MessageDigest;
 public class LicenseDecoder
 {
     private Key pub, shared;
-
-    public LicenseDecoder()
-    {
-        Security.addProvider( new BouncyCastleProvider() );
-    }
 
     public void setPublicKey( Key key )
     {
@@ -93,7 +87,7 @@ public class LicenseDecoder
             throw new IllegalStateException( "Keys must be set before decoding the license" );
         }
 
-        byte[] license = Base64.decode( licenseStr );
+        byte[] license = DatatypeConverter.parseBase64Binary( licenseStr );
         try
         {
             Cipher cipher2 = Cipher.getInstance( "DES/ECB/PKCS5Padding" );
@@ -123,7 +117,7 @@ public class LicenseDecoder
                 throw new InvalidLicenseException();
             }
 
-            return myData;            
+            return myData;
         }
         catch ( Exception e )
         {

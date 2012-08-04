@@ -16,17 +16,14 @@
 
 package org.headsupdev.license.manager;
 
-import org.bouncycastle.util.encoders.Base64;
 import org.headsupdev.license.*;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.Cipher;
-import java.security.KeyPairGenerator;
-import java.security.KeyPair;
 import java.security.Key;
 import java.io.*;
 import java.util.Enumeration;
 import java.util.Properties;
+
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * A main class that handles creation of keys and licenses etc. 
@@ -246,10 +243,10 @@ public class Main {
         stream.readFully( buffer );
         stream.close();
 
-        byte[] encoded = Base64.encode( buffer );
+        String encoded = DatatypeConverter.printBase64Binary( buffer );
 
         DataOutputStream outStream = new DataOutputStream( new FileOutputStream( out ) );
-        outStream.write( encoded );
+        outStream.write( encoded.getBytes() );
         outStream.close();
     }
 
