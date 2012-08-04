@@ -82,15 +82,8 @@ public class Main {
         }
         else if ( command.equals( "test" ) )
         {
-            System.out.println( "Please enter the license to test: " );
-            StringBuffer in = new StringBuffer();
-
-            int chr;
-            while ( ( chr = System.in.read() ) != '\n' )
-            {
-                in.append( (char) chr );
-            }
-            main.test( in.toString() );
+            String in = readInput( "Please enter the license to test" );
+            main.test( in );
         }
         else if ( command.equals( "base64" ) )
         {
@@ -191,10 +184,12 @@ public class Main {
     private void create()
         throws Exception
     {
+        String who = readInput( "Who is this to be licensed to?" );
         Key prv = LicenseUtils.deserialiseKey( config.getPrivateKeyFile() );
         Key shr = LicenseUtils.deserialiseKey( config.getSharedKeyFile() );
 
         License in = new License();
+        in.setLicensedTo( who );
         LicenseEncoder encoder = new LicenseEncoder();
 
         encoder.setPrivateKey( prv );
@@ -223,6 +218,27 @@ public class Main {
             String key = (String) props.nextElement();
             System.out.println( "  " + key + " => " + out.getProperties().get( key ) );
         }
+    }
+
+    private static String readInput( String prompt )
+    {
+        System.out.println( prompt + ": " );
+        StringBuilder in = new StringBuilder();
+
+        int chr;
+        try
+        {
+            while ( ( chr = System.in.read() ) != '\n' )
+            {
+                in.append( (char) chr );
+            }
+        }
+        catch ( IOException e )
+        {
+            // just stop reading...
+        }
+
+        return in.toString();
     }
 
     private void base64Encode()

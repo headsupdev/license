@@ -16,7 +16,7 @@ Generate keys for first usage
 
     mvn exec:java -Dexec.args="genkeys"
 
-Then we can create a basic license - here you would like to override the main create() method to add your own properties
+Then we can create a basic license by default it asks who to license to - here you would like to override the main create() method to add your own properties
 
     mvn exec:java -Dexec.args="create"
 
