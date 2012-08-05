@@ -90,7 +90,14 @@ the creation code and also alter the code in your app to pass an instance of you
 
 More documentation to follow...
 
-## Planned Features
+## Work in Progress
 
-We are currently working on a management UI that makes managing licenses and creating custom license properties much easier - stay tuned!
+The license library is completely capable of controlling access to features based on license files and has been used in live software in a production environment.
+
+**However** The project has much ongoing work, most of which is focussed around creating a complete GUI for managing licenses.
+This is available in the project now as the default action when the jar is loaded but it cannot yet create licenses based on custom code - much more to come.
+
+For now just execute
+
+    java -jar target/license-1.1-SNAPSHOT.jar
 
