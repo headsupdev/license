@@ -68,14 +68,30 @@ public class Main {
             }
         }
 
+        LicenseManager manager = new LicenseManager( config );
         String command = args[ args.length - 1 ];
         if ( command.equals( "gen-keys" ) )
         {
-            main.generateKeys();
+            manager.generateKeys();
         }
         else if ( command.equals( "verify-keys" ) )
         {
-            main.verifyKeys();
+            try
+            {
+                if ( manager.verifyKeys() )
+                {
+                    System.out.println( "All keys present and correct" );
+                }
+                else
+                {
+                    System.out.println( "Public and private keys not a pair" );
+                }
+            }
+            catch ( Exception e )
+            {
+                System.out.println( "Public and private keys not a pair" );
+                System.out.println( "  cause: " + e.getMessage() );
+            }
         }
         else if ( command.equals( "create" ) )
         {
@@ -124,62 +140,6 @@ public class Main {
         System.out.println( "    verify-keys  Check that the keys needed all exist and work correctly" );
         System.out.println( "    base64       Encode the keys to base64 data, written to files ending .b64" );
         System.out.println( "    help         Show this help page" );
-    }
-
-    private void generateKeys()
-        throws Exception
-    {
-        KeyPairGenerator keyGen = KeyPairGenerator.getInstance( "RSA" );
-        keyGen.initialize( 1024 );
-        KeyPair keyPair = keyGen.generateKeyPair();
-        LicenseUtils.serialiseKey( config.getPrivateKeyFile(), keyPair.getPrivate() );
-        LicenseUtils.serialiseKey( config.getPublicKeyFile(), keyPair.getPublic() );
-
-        KeyGenerator keyGen2 = KeyGenerator.getInstance( "DES" );
-        keyGen2.init( 56 );
-        Key shared = keyGen2.generateKey();
-        LicenseUtils.serialiseKey( config.getSharedKeyFile(), shared );
-    }
-
-    private void verifyKeys()
-        throws Exception
-    {
-        Key prv = LicenseUtils.deserialiseKey( config.getPrivateKeyFile() );
-        Key pub = LicenseUtils.deserialiseKey( config.getPublicKeyFile() );
-        Key shr = LicenseUtils.deserialiseKey( config.getSharedKeyFile() );
-
-        String checking = "This is a test";
-        String result = null;
-        Exception cause = null;
-
-        try
-        {
-            Cipher cipher = Cipher.getInstance( "RSA/ECB/PKCS1Padding" );
-            cipher.init( Cipher.ENCRYPT_MODE, prv );
-            byte[] encoded = cipher.doFinal( checking.getBytes() );
-
-            Cipher cipher2 = Cipher.getInstance( "RSA/ECB/PKCS1Padding" );
-            cipher2.init( Cipher.DECRYPT_MODE, pub );
-            result = new String( cipher2.doFinal( encoded ) );
-        }
-        catch ( Exception e )
-        {
-            // fall back to the null result so it will fail...
-            cause = e;
-        }
-
-        if ( checking.equals( result ) )
-        {
-            System.out.println( "All keys present and correct" );
-        }
-        else
-        {
-            System.out.println( "Public and private keys not a pair" );
-            if ( cause != null )
-            {
-                System.out.println( "  cause: " + cause.getMessage() );
-            }
-        }
     }
 
     private void create()

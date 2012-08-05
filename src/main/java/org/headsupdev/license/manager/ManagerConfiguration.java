@@ -51,6 +51,11 @@ public class ManagerConfiguration
             licenseDirectory = new File( System.getProperty( "user.home" ), ".licenses" );
         }
 
+        if ( !licenseDirectory.exists() )
+        {
+            licenseDirectory.mkdirs();
+        }
+
         privateKeyFile = new File( licenseDirectory, "private-key" );
         publicKeyFile = new File( licenseDirectory, "public-key" );
         sharedKeyFile = new File( licenseDirectory, "shared-key" );
