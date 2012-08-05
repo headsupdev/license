@@ -42,7 +42,8 @@ public class Main {
         Main main = new Main();
         if ( args.length < 1 )
         {
-            main.printHelp();
+            ManagerUI ui = new ManagerUI();
+            ui.setVisible( true );
             return;
         }
 
@@ -106,9 +107,14 @@ public class Main {
         {
             main.base64Encode();
         }
-        else
+        else if ( command.equals( "help" ) )
         {
             main.printHelp();
+        }
+        else
+        {
+            ManagerUI ui = new ManagerUI();
+            ui.setVisible( true );
         }
     }
 
@@ -139,6 +145,7 @@ public class Main {
         System.out.println( "    gen-keys     Write a new set of keys to the current directory" );
         System.out.println( "    verify-keys  Check that the keys needed all exist and work correctly" );
         System.out.println( "    base64       Encode the keys to base64 data, written to files ending .b64" );
+        System.out.println( "    manager      Load the main manager screen (default)" );
         System.out.println( "    help         Show this help page" );
     }
 
