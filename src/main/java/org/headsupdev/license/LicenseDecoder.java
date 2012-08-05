@@ -121,8 +121,7 @@ public class LicenseDecoder
         }
         catch ( Exception e )
         {
-            e.printStackTrace();
-            return new byte[0];
+            throw new InvalidLicenseException( e );
         }
     }
 }

@@ -26,4 +26,24 @@ package org.headsupdev.license.exception;
 public class InvalidLicenseException
     extends LicenseException
 {
+    public InvalidLicenseException()
+    {
+    }
+
+    public InvalidLicenseException( Exception cause )
+    {
+        super( cause );
+    }
+
+    @Override
+    public String getMessage()
+    {
+        String message = "Invalid License";
+        if ( getCause() != null )
+        {
+            message += ": " + getCause().getMessage();
+        }
+
+        return message;
+    }
 }

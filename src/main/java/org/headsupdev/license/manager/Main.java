@@ -17,6 +17,7 @@
 package org.headsupdev.license.manager;
 
 import org.headsupdev.license.*;
+import org.headsupdev.license.exception.LicenseException;
 
 import java.security.Key;
 import java.io.*;
@@ -209,14 +210,22 @@ public class Main {
         decoder.setPublicKey( pub );
         decoder.setSharedKey( shr );
 
-        VerboseLicense out = new VerboseLicense();
-        decoder.decodeLicense( license, out );
-
-        Enumeration props = out.getProperties().keys();
-        while ( props.hasMoreElements() )
+        try
         {
-            String key = (String) props.nextElement();
-            System.out.println( "  " + key + " => " + out.getProperties().get( key ) );
+            VerboseLicense out = new VerboseLicense();
+            decoder.decodeLicense( license, out );
+
+            Enumeration props = out.getProperties().keys();
+            while ( props.hasMoreElements() )
+            {
+                String key = (String) props.nextElement();
+                System.out.println( "  " + key + " => " + out.getProperties().get( key ) );
+            }
+            System.out.println( "License verified" );
+        }
+        catch ( Exception e )
+        {
+            System.out.println( "License check failed - " + e.getMessage() );
         }
     }
 
