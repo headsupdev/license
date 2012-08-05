@@ -19,19 +19,19 @@ The private key is used to sign the license, the public key to validate it and t
 
 When you create a license the following operations are performed:
 
-1 A digest is taken of the license data
-1 The digest is encrypted using the private key
-1 The data and encrypted digest are combined
-1 The whole license is encrypted using the shared key and encoded to plain text
+1. A digest is taken of the license data
+1. The digest is encrypted using the private key
+1. The data and encrypted digest are combined
+1. The whole license is encrypted using the shared key and encoded to plain text
 
 This creates a license that can be copied and pasted wherever required
 
 When a license decode request is performed the following steps are executed
 
-1 The license is decoded and decrypted using the shared key
-1 The data is extracted and saved
-1 The digest is decrypted using the public key which verifies the source of the license
-1 The digest is checked against the data to ensure it has not changed
+1. The license is decoded and decrypted using the shared key
+1. The data is extracted and saved
+1. The digest is decrypted using the public key which verifies the source of the license
+1. The digest is checked against the data to ensure it has not changed
 
 This means that a validated license can be guaranteed to have come from you (as long as you don't leak your private key)
 and that the data has not been interfered with in transit.
