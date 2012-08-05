@@ -96,4 +96,38 @@
       <url>dav:http://headsupdev.org/repository/site/license/</url>
     </site>
   </distributionManagement>
+
+  <profiles>
+    <profile>
+      <id>mac</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>osxappbundle-maven-plugin</artifactId>
+            <version>1.0-alpha-2</version>
+            <configuration>
+              <mainClass>org.headsupdev.license.manager.Main</mainClass>
+              <bundleName>License Manager</bundleName>
+              <iconFile>${basedir}/src/main/app-resources/manager.icns</iconFile>
+              <jvmVersion>1.5+</jvmVersion>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>bundle</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
